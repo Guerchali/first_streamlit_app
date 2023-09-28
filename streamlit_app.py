@@ -1,13 +1,7 @@
 import streamlit
 import pandas
-streamlit.header("Fruityvice Fruit Advice!")
-
 import requests
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-# normalize the data into a table 
-fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
-# output the screen as a table 
-streamlit.dataframe(fruityvice_normalized)
+
 streamlit.title('My parent New HEALThy diner')
 streamlit.header('hii everyone')
 streamlit.header('🥑🍞Breakfast Menu')
@@ -22,4 +16,12 @@ streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index))
 fruits_selected = streamlit.multiselect("Select Multi fruit :",list(my_fruit_list.index),['Avocado','Strawberries'])
 fruits_to_show = my_fruit_list.loc[fruits_selected]
 streamlit.dataframe(fruits_to_show)
+
+streamlit.header("Fruityvice Fruit Advice!")
+
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+# normalize the data into a table 
+fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
+# output the screen as a table 
+streamlit.dataframe(fruityvice_normalized)
 
