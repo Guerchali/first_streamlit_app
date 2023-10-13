@@ -4,7 +4,7 @@ import requests
 import snowflake.connector 
 
 snowflake_params = {
-"user" = "sguerchal"
+user = "sguerchal"
 "password" = "Tensh@wa3er12345"
 "account" = "YPWUSKI-WT18555" 
 "warehouse" = "pc_rivery_wh" 
