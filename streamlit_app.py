@@ -3,7 +3,7 @@ import pandas
 import requests
 import snowflake.connector 
 
-snowflake_params = 
+snowflake_params = {
 "user" = "sguerchal"
 "password" = "Tensh@wa3er12345"
 "account" = "YPWUSKI-WT18555" 
