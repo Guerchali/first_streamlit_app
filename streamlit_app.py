@@ -18,12 +18,13 @@ snowflake_params = {
 my_cnx = snowflake.connector.connect(**snowflake_params)
 my_cur = my_cnx.cursor()
 my_cur.execute("select * from fruit_load_list")
+my_data_row = my_cur.fetchone()
+
 # Execute a SQL query
 my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
 my_data_row = my_cur.fetchone()
 
 # Display the results using Streamlit
-streamlit.text("Hello from Snowflake:")
 streamlit.text(" the fruit list contains")
 streamlit.text(my_data_row)
 
