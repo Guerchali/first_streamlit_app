@@ -3,6 +3,27 @@ import pandas
 import requests
 import snowflake.connector 
 
+snowflake_params = 
+"user" = "sguerchal"
+"password" = "Tensh@wa3er12345"
+"account" = "YPWUSKI-WT18555" 
+"warehouse" = "pc_rivery_wh" 
+"database" = "pc_rivery_db" 
+"schema" = "public"
+"role" = "accountadmin"    
+}
+# Establish the Snowflake connection
+my_cnx = snowflake.connector.connect(**snowflake_params)
+my_cur = my_cnx.cursor()
+
+# Execute a SQL query
+my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
+my_data_row = my_cur.fetchone()
+
+# Display the results using Streamlit
+streamlit.text("Hello from Snowflake:")
+streamlit.text(my_data_row)
+
 
 streamlit.title('My parent New HEALThy diner')
 streamlit.header('hii everyone')
