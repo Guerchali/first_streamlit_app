@@ -18,31 +18,22 @@ snowflake_params = {
 my_cnx = snowflake.connector.connect(**snowflake_params)
 my_cur = my_cnx.cursor()
 
-# Create a Streamlit text entry box
-add_my_fruit = streamlit.text_input("Add a Fruit")
+# Add a text entry box for the user to input a fruit
+add_my_fruit = streamlit.text_input("Add a fruit:")
 
-# Check if the user has entered a fruit
+# Check if the text entry box is not empty
 if add_my_fruit:
-    # Insert the new fruit into the database
-    insert_query = f"INSERT INTO pc_rivery_db.public.fruit_load_list (fruit) VALUES ('{add_my_fruit}')"
-    my_cur.execute(insert_query)
-    my_cnx.commit()
-    streamlit.text(f"Added {add_my_fruit} to the fruit list!")
+    # Execute a SQL query to insert the user-added fruit into the database
+    my_cur.execute(f"INSERT INTO fruit_load_list (fruit) VALUES ('{add_my_fruit}')")
+    my_cnx.commit()  # Commit the changes to the database
 
-# Retrieve the list of fruits
+# Execute a SQL query to retrieve the updated fruit list
 my_cur.execute("SELECT * FROM pc_rivery_db.public.fruit_load_list")
 my_data_rows = my_cur.fetchall()
 
-streamlit.header("The fruit list contains")
+streamlit.header("The fruit list contains:")
 streamlit.dataframe(my_data_rows)
 
-
-# Second text entry box to allow the end user to add a fruit
-new_fruit = streamlit.text_input("Add a new fruit:")
-if new_fruit:
-    # Insert the new fruit into the Snowflake table
-    my_cur.execute(f"INSERT INTO pc_rivery_db.public.fruit_load_list (fruit) VALUES ('{new_fruit}')")
-    streamlit.success(f"Added {new_fruit} to the fruit list")
 
 # Execute a SQL query
 
