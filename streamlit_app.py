@@ -17,10 +17,25 @@ snowflake_params = {
 # Establish the Snowflake connection
 my_cnx = snowflake.connector.connect(**snowflake_params)
 my_cur = my_cnx.cursor()
-my_cur.execute("select * from pc_rivery_db.public.fruit_load_list")
+
+# Create a Streamlit text entry box
+add_my_fruit = streamlit.text_input("Add a Fruit")
+
+# Check if the user has entered a fruit
+if add_my_fruit:
+    # Insert the new fruit into the database
+    insert_query = f"INSERT INTO pc_rivery_db.public.fruit_load_list (fruit) VALUES ('{add_my_fruit}')"
+    my_cur.execute(insert_query)
+    my_cnx.commit()
+    streamlit.text(f"Added {add_my_fruit} to the fruit list!")
+
+# Retrieve the list of fruits
+my_cur.execute("SELECT * FROM pc_rivery_db.public.fruit_load_list")
 my_data_rows = my_cur.fetchall()
-streamlit.header(" the fruit list contains")
+
+streamlit.header("The fruit list contains")
 streamlit.dataframe(my_data_rows)
+
 
 # Second text entry box to allow the end user to add a fruit
 new_fruit = streamlit.text_input("Add a new fruit:")
