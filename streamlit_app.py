@@ -23,11 +23,11 @@ streamlit.header(" the fruit list contains")
 streamlit.dataframe(my_data_rows)
 
 # Second text entry box to allow the end user to add a fruit
-new_fruit = st.text_input("Add a new fruit:")
+new_fruit = streamlit.text_input("Add a new fruit:")
 if new_fruit:
     # Insert the new fruit into the Snowflake table
     my_cur.execute(f"INSERT INTO pc_rivery_db.public.fruit_load_list (fruit) VALUES ('{new_fruit}')")
-    st.success(f"Added {new_fruit} to the fruit list")
+    streamlit.success(f"Added {new_fruit} to the fruit list")
 
 # Execute a SQL query
 
